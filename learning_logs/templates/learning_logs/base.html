@@ -1,0 +1,62 @@
+
+{% load bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <title>Title</title>
+    <! --bootstrap自定义模板标签 -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head>
+<body>
+<! --父模板-创建主页连接，在项目中每个页面都继承故模板，每个页面都有主页连接 -->
+
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+    <a class="navbar-brand" href="{% url 'learning_logs:index' %}">learning log</a>
+
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'learning_logs:topics' %}">Topics</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text">hello, {{ user.username }}</span>
+                </li>
+               <li class="nav-item">
+                    <! -- 注销连接-- >
+                    <a class="nav-link" href="{% url 'users:logout' %}">log out</a>
+               </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:register' %}">register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">log in</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<main role="main" class="container">
+    <div class="pb-2 mb-2 border-bottom">
+        <! -- 占位符信息有子模版填充 -->
+        {% block page_header %}{% endblock page_header %}
+    </div>
+    <div>
+        <! -- 占位符信息有子模版填充 -->
+        {% block content %}{% endblock content %}
+    </div>
+</main>
+
+</body>
+</html>

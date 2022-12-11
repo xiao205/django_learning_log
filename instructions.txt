@@ -1,0 +1,40 @@
+我们编写一个名为学习笔记，的web应用程序，让用户能够记录感兴趣的主题，并在学习每个主题的过程中添加日志条目。
+学习笔记的主页对这个网站进行描述，并邀请用户进行注册或登录，用户登录后可以创建主题，添加新条目，和阅读已有条目。
+
+在cmd命令行创建数据库
+ 切换到项目目录
+python manage.py  migrate   会生成一个db.sqlite3的数据库
+
+生成一个项目
+# python manage.py  startapp learning_logs  会生成一个learning_log的目录 
+
+# 每次修改管理数据都药进行下面三步操作：
+1 修改manage.py
+
+2让django修改数据库使其能够存储与模型topic相关的信息  会生成0001_initial.py
+E:\py_code\djangoProject>python manage.py makemigrations learning_logs
+Migrations for 'learning_logs':
+  learning_logs\migrations\0001_initial.py
+    - Create model Topic
+
+3#让django替我们修改数据库 
+E:\py_code\djangoProject>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, learning_logs, sessions
+Running migrations:
+  Applying learning_logs.0001_initial... OK
+
+
+创建用户
+E:\py_code\djangoProject>python manage.py createsuperuser
+Username (leave blank to use '73267'): ll_admin
+Email address:
+Password:
+Password (again):
+This password is too short. It must contain at least 8 characters.
+This password is too common.
+This password is entirely numeric.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+
+>python manage.py runserver  运行服务
